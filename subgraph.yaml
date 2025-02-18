@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Factory
+    network: berachain
+    source:
+      address: "0x8d15Db9CeE68beF3beb65c576180e6D83F5c431D"
+      abi: Factory
+      startBlock: 833681
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Factory__Claimed
+        - Factory__LvlSet
+        - Factory__ToolMultiplierSet
+        - Factory__ToolPurchased
+        - Factory__ToolSet
+        - Factory__ToolUpgraded
+        - OwnershipTransferred
+      abis:
+        - name: Factory
+          file: ./abis/Factory.json
+      eventHandlers:
+        - event: Factory__Claimed(indexed uint256,uint256)
+          handler: handleFactory__Claimed
+        - event: Factory__LvlSet(uint256,uint256,uint256)
+          handler: handleFactory__LvlSet
+        - event: Factory__ToolMultiplierSet(uint256,uint256)
+          handler: handleFactory__ToolMultiplierSet
+        - event: Factory__ToolPurchased(indexed uint256,uint256,uint256,uint256,uint256)
+          handler: handleFactory__ToolPurchased
+        - event: Factory__ToolSet(uint256,uint256,uint256)
+          handler: handleFactory__ToolSet
+        - event: Factory__ToolUpgraded(indexed uint256,uint256,uint256,uint256,uint256)
+          handler: handleFactory__ToolUpgraded
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/factory.ts
