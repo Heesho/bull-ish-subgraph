@@ -3,6 +3,9 @@
     "Factory": {
       "address": "0x8d15Db9CeE68beF3beb65c576180e6D83F5c431D",
       "startBlock": 833681
+    },
+    "Contract": {
+      "address": "0xe1d8215F710Da00d9918ebB649DDF1928Ad55896"
     }
   }
 }

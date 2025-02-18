@@ -1,70 +1,20 @@
-type Factory__Claimed @entity(immutable: true) {
+type User @entity {
   id: Bytes!
-  tokenId: BigInt! # uint256
-  amount: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  factories: [Factory!]! @derivedFrom(field: "account")
 }
 
-type Factory__LvlSet @entity(immutable: true) {
-  id: Bytes!
-  lvl: BigInt! # uint256
-  cost: BigInt! # uint256
-  unlock: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type Factory @entity {
+  id: String!
+  account: User!
+  moolaPerSecond: BigDecimal!
+  moolaProduced: BigDecimal!
+  moolaSpent: BigDecimal!
+  tools: [Tool!]! @derivedFrom(field: "factory")
 }
 
-type Factory__ToolMultiplierSet @entity(immutable: true) {
-  id: Bytes!
-  index: BigInt! # uint256
-  multiplier: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Factory__ToolPurchased @entity(immutable: true) {
-  id: Bytes!
-  tokenId: BigInt! # uint256
-  toolId: BigInt! # uint256
-  newAmount: BigInt! # uint256
-  cost: BigInt! # uint256
-  ups: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Factory__ToolSet @entity(immutable: true) {
-  id: Bytes!
-  toolId: BigInt! # uint256
-  baseUps: BigInt! # uint256
-  baseCost: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Factory__ToolUpgraded @entity(immutable: true) {
-  id: Bytes!
-  tokenId: BigInt! # uint256
-  toolId: BigInt! # uint256
-  newLevel: BigInt! # uint256
-  cost: BigInt! # uint256
-  ups: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type Tool @entity {
+  id: String!
+  factory: Factory!
+  amount: BigInt!
+  level: BigInt!
 }
