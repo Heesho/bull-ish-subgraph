@@ -50,3 +50,53 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/bullish.ts
+  - kind: ethereum
+    name: Plugin
+    network: berachain
+    source:
+      address: "0xE259A689D13139F413eE693BE27181192319a629"
+      abi: Plugin
+      startBlock: 833920
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Plugin
+        - Factory
+      abis:
+        - name: Plugin
+          file: ./abis/Plugin.json
+      eventHandlers:
+        - event: Plugin__ClickAdded(uint256,address,uint256,string)
+          handler: handlePlugin__ClickAdded
+        - event: Plugin__EntryFeeSet(uint256)
+          handler: handlePlugin__EntryFeeSet
+      file: ./src/plugin.ts
+  - kind: ethereum
+    name: Gauge
+    network: berachain
+    source:
+      address: "0xD2C86EAB23dF8934db0323Ce3eb4CB49b2F6E933"
+      abi: Gauge
+      startBlock: 1063720
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Plugin
+        - User
+      abis:
+        - name: Gauge
+          file: ./abis/Gauge.json
+      eventHandlers:
+        - event: Gauge__Deposited(indexed address,uint256)
+          handler: handleGauge__Deposited
+        - event: Gauge__RewardNotified(indexed address,uint256)
+          handler: handleGauge__RewardNotified
+        - event: Gauge__RewardPaid(indexed address,indexed address,uint256)
+          handler: handleGauge__RewardPaid
+        - event: Gauge__Withdrawn(indexed address,uint256)
+          handler: handleGauge__Withdrawn
+      file: ./src/gauge.ts

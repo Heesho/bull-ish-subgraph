@@ -11,10 +11,13 @@ export function handleFactory__Claimed(event: Factory__ClaimedEvent): void {
   if (!factory) {
     factory = new Factory(event.params.tokenId.toString());
     factory.moolaPerSecond = ZERO_BD;
-    factory.moolaProduced = ZERO_BD;
-    factory.moolaSpent = ZERO_BD;
+    factory.moolaProducedByFactory = ZERO_BD;
+    factory.moolaSpentOnFactory = ZERO_BD;
+    factory.spanks = ZERO_BI;
+    factory.moolaProducedBySpanking = ZERO_BD;
+    factory.beraSpentOnSpanking = ZERO_BD;
   }
-  factory.moolaProduced = factory.moolaProduced.plus(
+  factory.moolaProducedByFactory = factory.moolaProducedByFactory.plus(
     convertEthToDecimal(event.params.amount)
   );
 
@@ -28,11 +31,14 @@ export function handleFactory__ToolPurchased(
   if (!factory) {
     factory = new Factory(event.params.tokenId.toString());
     factory.moolaPerSecond = ZERO_BD;
-    factory.moolaProduced = ZERO_BD;
-    factory.moolaSpent = ZERO_BD;
+    factory.moolaProducedByFactory = ZERO_BD;
+    factory.moolaSpentOnFactory = ZERO_BD;
+    factory.spanks = ZERO_BI;
+    factory.moolaProducedBySpanking = ZERO_BD;
+    factory.beraSpentOnSpanking = ZERO_BD;
   }
   factory.moolaPerSecond = convertEthToDecimal(event.params.ups);
-  factory.moolaSpent = factory.moolaSpent.plus(
+  factory.moolaSpentOnFactory = factory.moolaSpentOnFactory.plus(
     convertEthToDecimal(event.params.cost)
   );
 
@@ -57,11 +63,14 @@ export function handleFactory__ToolUpgraded(
   if (!factory) {
     factory = new Factory(event.params.tokenId.toString());
     factory.moolaPerSecond = ZERO_BD;
-    factory.moolaProduced = ZERO_BD;
-    factory.moolaSpent = ZERO_BD;
+    factory.moolaProducedByFactory = ZERO_BD;
+    factory.moolaSpentOnFactory = ZERO_BD;
+    factory.spanks = ZERO_BI;
+    factory.moolaProducedBySpanking = ZERO_BD;
+    factory.beraSpentOnSpanking = ZERO_BD;
   }
   factory.moolaPerSecond = convertEthToDecimal(event.params.ups);
-  factory.moolaSpent = factory.moolaSpent.plus(
+  factory.moolaSpentOnFactory = factory.moolaSpentOnFactory.plus(
     convertEthToDecimal(event.params.cost)
   );
 

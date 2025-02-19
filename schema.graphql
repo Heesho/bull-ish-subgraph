@@ -1,5 +1,17 @@
+type Plugin @entity {
+  id: Bytes!
+  spankPrice: BigDecimal!
+  beraEarnedForTreasury: BigDecimal!
+  beraEarnedForDeveloper: BigDecimal!
+  beraEarnedForBribes: BigDecimal!
+  oBeroDistributedToSpankers: BigDecimal!
+  totalQueueBalance: BigDecimal!
+}
+
 type User @entity {
   id: Bytes!
+  oBeroEarned: BigDecimal!
+  queueBalance: BigDecimal!
   factories: [Factory!]! @derivedFrom(field: "account")
 }
 
@@ -7,8 +19,11 @@ type Factory @entity {
   id: String!
   account: User!
   moolaPerSecond: BigDecimal!
-  moolaProduced: BigDecimal!
-  moolaSpent: BigDecimal!
+  moolaProducedByFactory: BigDecimal!
+  moolaSpentOnFactory: BigDecimal!
+  spanks: BigInt!
+  moolaProducedBySpanking: BigDecimal!
+  beraSpentOnSpanking: BigDecimal!
   tools: [Tool!]! @derivedFrom(field: "factory")
 }
 
@@ -17,4 +32,48 @@ type Tool @entity {
   factory: Factory!
   amount: BigInt!
   level: BigInt!
+}
+type Gauge__Deposited @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Gauge__RewardAdded @entity(immutable: true) {
+  id: Bytes!
+  rewardToken: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Gauge__RewardNotified @entity(immutable: true) {
+  id: Bytes!
+  rewardToken: Bytes! # address
+  reward: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Gauge__RewardPaid @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  rewardsToken: Bytes! # address
+  reward: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Gauge__Withdrawn @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
