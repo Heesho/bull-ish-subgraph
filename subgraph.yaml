@@ -79,7 +79,7 @@ dataSources:
     source:
       address: "0xD2C86EAB23dF8934db0323Ce3eb4CB49b2F6E933"
       abi: Gauge
-      startBlock: 1063720
+      startBlock: 833681
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
